@@ -2,7 +2,6 @@ package com.ml.doctor.network;
 
 import android.content.Context;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -101,6 +100,10 @@ public class NetworkManager {
         doRequest(Method.POST, url, params, mClass, successCallback, failedCallback);
     }
 
+    public void postResultClass(String url, Map<String, String> params, Type mType, SuccessCallback successCallback, FailedCallback failedCallback){
+        doRequest(Method.POST, url, params, mType, successCallback, failedCallback);
+    }
+
     public void doRequest(Method method, String url, Map<String, String> paramMap, final Object type,
                           final SuccessCallback successCallback, final FailedCallback failedCallback){
         Callback responseCallback = initCallback(type, successCallback, failedCallback);
@@ -117,11 +120,12 @@ public class NetworkManager {
                     }
                 }
                 builder.url(url).post(paramBuilder.build());
+//                builder.url(paramMap == null ? url : url + "?" + addParams(paramMap)).post(paramBuilder.build());
                 break;
         }
-        if (!TextUtils.isEmpty(CustomApplication.getInstance().userToken)){
-            builder.addHeader("token", CustomApplication.getInstance().userToken);
-        }
+//        if (!TextUtils.isEmpty(CustomApplication.getInstance().userToken)){
+//            builder.addHeader("token", CustomApplication.getInstance().userToken);
+//        }
         Request request = builder.build();
         if (request != null){
             client.newCall(request).enqueue(responseCallback);
@@ -158,15 +162,15 @@ public class NetworkManager {
                     public void run() {
                         try {
                             JSONObject responseObject = new JSONObject(response);
-                            if ("success".equals(responseObject.getString("status"))){
+                            if (responseObject.getBoolean("tag")){
                                 if (type == null) {
-                                    successCallback.onSuccess(responseObject.getString("results"));
+                                    successCallback.onSuccess(responseObject.getString("data"));
                                 } else if (type instanceof Class || type instanceof Type) {
-                                    successCallback.onSuccess(mGson.fromJson(responseObject.getString("results"),
+                                    successCallback.onSuccess(mGson.fromJson(responseObject.getString("data"),
                                             type instanceof Class ? (Class)type : (Type)type));
                                 }
                             } else {
-                                setDefaultFailed(responseObject.getString("msg"));
+                                setDefaultFailed(responseObject.getString("message"));
                             }
                         } catch (Exception e) {
                             setDefaultFailed(e.getMessage());

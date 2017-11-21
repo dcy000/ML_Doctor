@@ -8,4 +8,7 @@
     <color name="colorDivider">#f1f1f1</color>
     <color name="colorTitleBg">#f7f7f7</color>
     <color name="colorTitleText">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="login_bg_color">#30B4B8</color>
+    <color name="login_bg_color_black">#248f93</color>
 </resources>
