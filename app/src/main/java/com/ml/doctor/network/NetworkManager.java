@@ -88,6 +88,10 @@ public class NetworkManager {
         doRequest(Method.GET, url, params, mType, successCallback, null);
     }
 
+    public void getResultClass(String url, Map<String, String> params, Type mType, SuccessCallback successCallback, FailedCallback failedCallback){
+        doRequest(Method.GET, url, params, mType, successCallback, failedCallback);
+    }
+
     public void postResultString(String url, Map<String, String> params, SuccessCallback successCallback){
         postResultString(url, params, successCallback, null);
     }

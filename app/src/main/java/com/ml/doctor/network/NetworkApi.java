@@ -1,8 +1,12 @@
 package com.ml.doctor.network;
 
+import com.google.gson.reflect.TypeToken;
 import com.ml.doctor.bean.LoginBean;
+import com.ml.doctor.bean.PatientDetailsBean;
+import com.ml.doctor.bean.PatientListBean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NetworkApi {
@@ -15,6 +19,10 @@ public class NetworkApi {
      * 患者列表
      */
     public static final String PatientList=BasicUrl+"docter/docter_users";
+    /**
+     * 患者详情页
+     */
+    public static final String PatientDetails=BasicUrl+"br/docter_oneuser";
 
     /**
      * 用户登录
@@ -25,14 +33,46 @@ public class NetworkApi {
         map.put("password",password);
         NetworkManager.getInstance().postResultClass(Login,map, LoginBean.class,listener,failedCallback);
     }
-    public static void patientList(int docterid,String bname,int start,int limit,NetworkManager.SuccessCallback<LoginBean> listener,NetworkManager.FailedCallback failedCallback){
+
+    /**
+     * 患者列表
+     * @param docterid
+     * @param bname
+     * @param start
+     * @param limit
+     * @param listener
+     * @param failedCallback
+     */
+    public static void patientList(int docterid, String bname, int start, int limit, NetworkManager.SuccessCallback<List<PatientListBean>> listener, NetworkManager.FailedCallback failedCallback){
+
         Map<String,String> map=new HashMap<>();
         map.put("docterid",docterid+"");
-        map.put("bname",bname);
+        if(null!=bname){
+            map.put("bname",bname);
+        }
         map.put("start",start+"");
         map.put("limit",limit+"");
-        NetworkManager.getInstance().postResultClass(PatientList,map, LoginBean.class,listener,failedCallback);
+        NetworkManager.getInstance().getResultClass(PatientList,map,new TypeToken<List<PatientListBean>>() {
+        }.getType(),listener,failedCallback);
     }
+
+    /**
+     * 患者详情页
+     * @param start
+     * @param limit
+     * @param listener
+     * @param failedCallback
+     */
+    public static void patientDetails(String bid, int start, int limit, NetworkManager.SuccessCallback<List<PatientDetailsBean>> listener, NetworkManager.FailedCallback failedCallback){
+
+        Map<String,String> map=new HashMap<>();
+        map.put("bid",bid);
+        map.put("start",start+"");
+        map.put("limit",limit+"");
+        NetworkManager.getInstance().getResultClass(PatientDetails,map,new TypeToken<List<PatientDetailsBean>>() {
+        }.getType(),listener,failedCallback);
+    }
+
 //    public static void loginWithOpenId(String openId, String type, String nickName, String imageUrl,
 //                                       NetworkManager.SuccessCallback<LoginInfoBean> listener, NetworkManager.FailedCallback failedCallback){
 //        Map<String, String> paramsMap = new HashMap<>();

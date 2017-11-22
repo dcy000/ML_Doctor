@@ -2,6 +2,7 @@ package com.ml.doctor.bean;
 
 /**
  * Created by gzq on 2017/11/21.
+ * 登陆成功返回的字段
  */
 
 public class LoginBean {

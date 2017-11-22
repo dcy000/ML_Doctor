@@ -8,7 +8,7 @@ import com.ml.doctor.utils.LocalShared;
 public class CustomApplication extends Application {
     private static CustomApplication mInstance;
     public String userToken;
-    public String userId;
+    public int userId;
 
     public static CustomApplication getInstance(){
         return mInstance;

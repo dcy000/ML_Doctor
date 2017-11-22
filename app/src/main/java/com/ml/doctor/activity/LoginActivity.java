@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ml.doctor.R;
 import com.ml.doctor.bean.LoginBean;
+import com.ml.doctor.dialog.LoadingDialog;
 import com.ml.doctor.network.NetworkApi;
 import com.ml.doctor.network.NetworkManager;
 import com.ml.doctor.utils.LocalShared;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button register;
     @BindView(R.id.login)
     Button login;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,20 +75,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ToastUtil.showShort(LoginActivity.this,getString(R.string.pwd_tip));
             return;
         }
+        //显示加载dialog
+        showLoadingDialog("正在登陆");
         NetworkApi.login(user,pwd, new NetworkManager.SuccessCallback<LoginBean>() {
             @Override
             public void onSuccess(LoginBean response) {
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));//跳转到列表界面
-                ToastUtil.showShort(LoginActivity.this,response.getHosname());
+                ToastUtil.showShort(LoginActivity.this,getString(R.string.login_success));
                 Log.e(TAG,response.toString());
                 saveToLocal(response);
+                finish();
+                hideLoadingDialog();
             }
         }, new NetworkManager.FailedCallback() {
             @Override
             public void onFailed(String message) {
                 ToastUtil.showShort(LoginActivity.this,message);
+                hideLoadingDialog();
             }
         });
+
     }
 
     /**
@@ -98,5 +106,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         LocalShared.getInstance(this).setUserPhone(response.getTel());
     }
 
-
+    public void showLoadingDialog(String message) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(this, message);
+        }
+        mLoadingDialog.show();
+    }
+    public void hideLoadingDialog() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+        }
+    }
 }
