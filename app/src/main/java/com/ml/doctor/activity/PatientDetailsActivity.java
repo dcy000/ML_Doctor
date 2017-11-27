@@ -11,6 +11,7 @@ import com.ml.doctor.R;
 import com.ml.doctor.adapter.PatientDetailsAdapter;
 import com.ml.doctor.bean.PatientDetailsBean;
 import com.ml.doctor.bean.PatientListBean;
+import com.ml.doctor.call2.NimCallActivity;
 import com.ml.doctor.network.NetworkApi;
 import com.ml.doctor.network.NetworkManager;
 import com.ml.doctor.utils.LocalShared;
@@ -171,5 +172,11 @@ public class PatientDetailsActivity extends BaseActivity {
     @Override
     protected void onLeftViewClick() {
         finish();
+    }
+
+    @Override
+    protected void onRightTextClick() {
+        //呼叫
+        NimCallActivity.launch(this, "br_12345678912");
     }
 }

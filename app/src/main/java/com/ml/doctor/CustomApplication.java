@@ -2,7 +2,9 @@ package com.ml.doctor;
 
 import android.app.Application;
 
+import com.ml.doctor.call2.NimInitHelper;
 import com.ml.doctor.utils.LocalShared;
+import com.ml.doctor.utils.T;
 
 
 public class CustomApplication extends Application {
@@ -21,6 +23,8 @@ public class CustomApplication extends Application {
         LocalShared mLocalShared = LocalShared.getInstance(this);
         userToken = mLocalShared.getUserToken();
         userId = mLocalShared.getUserId();
+        T.init(this);
+        NimInitHelper.getInstance().init(this, true);
     }
 
 }
