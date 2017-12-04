@@ -9,10 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ml.doctor.CustomApplication;
 import com.ml.doctor.R;
 import com.ml.doctor.adapter.PatientDetailsAdapter;
 import com.ml.doctor.bean.PatientDetailsBean;
 import com.ml.doctor.bean.PatientListBean;
+import com.ml.doctor.call2.NimAccountHelper;
 import com.ml.doctor.call2.NimCallActivity;
 import com.ml.doctor.network.NetworkApi;
 import com.ml.doctor.network.NetworkManager;
@@ -282,6 +284,7 @@ public class PatientDetailsActivity extends BaseActivity {
     @Override
     protected void onRightViewClick() {
         //呼叫
+        NimAccountHelper.getInstance().login("docter_" + CustomApplication.getInstance().userId, "123456", null);
         NimCallActivity.launch(this, "user_" + patient.getBid());
     }
 }
