@@ -42,6 +42,7 @@ public class BaseActivity extends FragmentActivity {
                 (int) (50 * mResources.getDisplayMetrics().density)));
 //        rootView.setBackgroundResource();
         initTitleView();
+        hideLeftImg(mLeftView);
     }
 
     @Override
@@ -148,4 +149,6 @@ public class BaseActivity extends FragmentActivity {
     protected void onLeftViewClick(){
         finish();
     }
+    protected void hideLeftImg(ImageView mLeftImage){}
+
 }

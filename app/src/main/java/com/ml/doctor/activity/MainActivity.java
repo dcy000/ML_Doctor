@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ml.doctor.R;
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.list)
     RecyclerView list;
-    private int limit=10;
+    private int limit=500;
     private int start_index=0,end_index=9;
     private static String TAG="MainActivity";
     private PatientListAdapter adapter;
@@ -81,7 +82,7 @@ public class MainActivity extends BaseActivity {
 
     private void setAdapter(List<PatientListBean> response) {
         list.setLayoutManager(new LinearLayoutManager(this));
-        list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+//        list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         list.setAdapter(adapter=new PatientListAdapter(R.layout.patient_item,response));
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -92,5 +93,10 @@ public class MainActivity extends BaseActivity {
                         .putExtra("data",mData.get(position)));
             }
         });
+    }
+
+    @Override
+    protected void hideLeftImg(ImageView mLeftImage) {
+        mLeftImage.setVisibility(View.GONE);
     }
 }
