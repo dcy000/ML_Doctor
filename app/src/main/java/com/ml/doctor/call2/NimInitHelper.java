@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ml.doctor.CustomApplication;
 import com.ml.doctor.R;
 import com.ml.doctor.activity.LoginActivity;
 import com.ml.doctor.utils.Utils;
@@ -60,8 +59,8 @@ public class NimInitHelper {
 //            br_12345678913
 //            br_12345678914
 //            NimCallActivity.launch(this, "br_12345678912");
-            int userId = CustomApplication.getInstance().userId;
-            NimAccountHelper.getInstance().login("doctor_18940866148", "123456",null);
+//            int userId = CustomApplication.getInstance().userId;
+//            NimAccountHelper.getInstance().login("doctor_18940866148", "123456",null);
         }
     }
 

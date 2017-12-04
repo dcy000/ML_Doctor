@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ml.doctor.CustomApplication;
 import com.ml.doctor.R;
 import com.ml.doctor.bean.LoginBean;
+import com.ml.doctor.call2.NimAccountHelper;
 import com.ml.doctor.dialog.LoadingDialog;
 import com.ml.doctor.network.NetworkApi;
 import com.ml.doctor.network.NetworkManager;
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * 用户登录
      */
     private void login() {
-        String user=name.getText().toString().trim();
+        final String user=name.getText().toString().trim();
         String pwd=password.getText().toString().trim();
         if(TextUtils.isEmpty(user)){
             ToastUtil.showShort(LoginActivity.this,getString(R.string.name_tip));
@@ -80,6 +82,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         NetworkApi.login(user,pwd, new NetworkManager.SuccessCallback<LoginBean>() {
             @Override
             public void onSuccess(LoginBean response) {
+                int userId = CustomApplication.getInstance().userId;
+                NimAccountHelper.getInstance().login("docter_" + userId, "123456",null);
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));//跳转到列表界面
                 ToastUtil.showShort(LoginActivity.this,getString(R.string.login_success));
                 Log.e(TAG,response.toString());

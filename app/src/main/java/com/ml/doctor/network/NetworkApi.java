@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class NetworkApi {
-    public static final String BasicUrl = "http://192.168.200.103:8080/ZZB/";
+    public static final String BasicUrl = "http://118.31.238.207:8080/ZZB/";
+//    public static final String BasicUrl = "http://192.168.200.103:8080/ZZB/";
+//    public static final String BasicUrl = "http://192.168.200.109:8080/ZZB/";
     /**
      * 用户登录
      */

@@ -68,76 +68,76 @@ public class PatientDetailsActivity extends BaseActivity {
     }
 
     private void setData() {
-        doctor.setText("签约医生\n"+ LocalShared.getInstance(this).getUserNick());
-        sufferer.setText("签约患者\n"+patient.getBname());
-        machine.setText("签约机器\n"+patient.getEqid());
-        height.setText("患者身高："+patient.getHeight()+"cm");
-        weight.setText("患者体重："+patient.getWeight()+"Kg");
-        bloodType.setText("患者血型："+patient.getBlood_type());
-        String eating="",smoking="",drinking="",motioning="";
-        switch (patient.getEating_habits()){
+        doctor.setText("签约医生\n" + LocalShared.getInstance(this).getUserNick());
+        sufferer.setText("签约患者\n" + patient.getBname());
+        machine.setText("签约机器\n" + patient.getEqid());
+        height.setText("患者身高：" + patient.getHeight() + "cm");
+        weight.setText("患者体重：" + patient.getWeight() + "Kg");
+        bloodType.setText("患者血型：" + patient.getBlood_type());
+        String eating = "", smoking = "", drinking = "", motioning = "";
+        switch (patient.getEating_habits()) {
             case "1":
-                eating="荤素搭配";
+                eating = "荤素搭配";
                 break;
             case "2":
-                eating="偏好吃荤";
+                eating = "偏好吃荤";
                 break;
             case "3":
-                eating="偏好吃素";
+                eating = "偏好吃素";
                 break;
             case "4":
-                eating="偏好吃咸";
+                eating = "偏好吃咸";
                 break;
             case "5":
-                eating="偏好油腻";
+                eating = "偏好油腻";
                 break;
             case "6":
-                eating="偏好甜食";
+                eating = "偏好甜食";
                 break;
         }
-        diet.setText("饮食\n"+eating);
+        diet.setText("饮食\n" + eating);
 
-        switch (patient.getSmoke()){
+        switch (patient.getSmoke()) {
             case "1":
-                smoking="经常抽烟";
+                smoking = "经常抽烟";
                 break;
             case "2":
-                smoking="偶尔抽烟";
+                smoking = "偶尔抽烟";
                 break;
             case "3":
-                smoking="从不抽烟";
+                smoking = "从不抽烟";
                 break;
         }
-        smoke.setText("抽烟\n"+smoking);
+        smoke.setText("抽烟\n" + smoking);
 
-        switch (patient.getDrink()){
+        switch (patient.getDrink()) {
             case "1":
-                drinking="经常喝酒";
+                drinking = "经常喝酒";
                 break;
             case "2":
-                drinking="偶尔喝酒";
+                drinking = "偶尔喝酒";
                 break;
             case "3":
-                drinking="从不喝酒";
+                drinking = "从不喝酒";
                 break;
         }
-        drink.setText("喝酒\n"+drinking);
+        drink.setText("喝酒\n" + drinking);
 
-        switch (patient.getExercise_habits()){
+        switch (patient.getExercise_habits()) {
             case "1":
-                motioning="每天一次";
+                motioning = "每天一次";
                 break;
             case "2":
-                motioning="每周几次";
+                motioning = "每周几次";
                 break;
             case "3":
-                motioning="偶尔运动";
+                motioning = "偶尔运动";
                 break;
             case "4":
-                motioning="从不运动";
+                motioning = "从不运动";
                 break;
         }
-        motion.setText("运动\n"+motioning);
+        motion.setText("运动\n" + motioning);
     }
 
     private void getData() {
@@ -177,6 +177,6 @@ public class PatientDetailsActivity extends BaseActivity {
     @Override
     protected void onRightTextClick() {
         //呼叫
-        NimCallActivity.launch(this, "br_12345678912");
+        NimCallActivity.launch(this, "user_" + patient.getBid());
     }
 }
