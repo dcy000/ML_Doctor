@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ToastUtil.showShort(LoginActivity.this,getString(R.string.login_success));
                 Log.e(TAG,response.toString());
                 saveToLocal(response);
-                finish();
                 hideLoadingDialog();
             }
         }, new NetworkManager.FailedCallback() {

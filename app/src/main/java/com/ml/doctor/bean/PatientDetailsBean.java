@@ -1,12 +1,50 @@
 package com.ml.doctor.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by gzq on 2017/11/22.
  */
 
-public class PatientDetailsBean {
+public class PatientDetailsBean implements Parcelable{
     private String zid,eq,user,time,temper_ature,high_pressure,low_pressure,
             heart_rate,blood_sugar,blood_oxygen,pulse,ecg,yz,diagnosis,eqid,bname,state,hl;
+
+    protected PatientDetailsBean(Parcel in) {
+        zid = in.readString();
+        eq = in.readString();
+        user = in.readString();
+        time = in.readString();
+        temper_ature = in.readString();
+        high_pressure = in.readString();
+        low_pressure = in.readString();
+        heart_rate = in.readString();
+        blood_sugar = in.readString();
+        blood_oxygen = in.readString();
+        pulse = in.readString();
+        ecg = in.readString();
+        yz = in.readString();
+        diagnosis = in.readString();
+        eqid = in.readString();
+        bname = in.readString();
+        state = in.readString();
+        hl = in.readString();
+    }
+
+    public static final Creator<PatientDetailsBean> CREATOR = new Creator<PatientDetailsBean>() {
+        @Override
+        public PatientDetailsBean createFromParcel(Parcel in) {
+            return new PatientDetailsBean(in);
+        }
+
+        @Override
+        public PatientDetailsBean[] newArray(int size) {
+            return new PatientDetailsBean[size];
+        }
+    };
 
     public String getZid() {
         return zid;
@@ -174,5 +212,32 @@ public class PatientDetailsBean {
                 ", state='" + state + '\'' +
                 ", hl='" + hl + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(zid);
+        dest.writeString(eq);
+        dest.writeString(user);
+        dest.writeString(time);
+        dest.writeString(temper_ature);
+        dest.writeString(high_pressure);
+        dest.writeString(low_pressure);
+        dest.writeString(heart_rate);
+        dest.writeString(blood_sugar);
+        dest.writeString(blood_oxygen);
+        dest.writeString(pulse);
+        dest.writeString(ecg);
+        dest.writeString(yz);
+        dest.writeString(diagnosis);
+        dest.writeString(eqid);
+        dest.writeString(bname);
+        dest.writeString(state);
+        dest.writeString(hl);
     }
 }
