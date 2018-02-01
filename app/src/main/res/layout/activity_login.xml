@@ -13,9 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Large"
-        android:text="Welcome back！"
+        android:text="国  辰  迈  联"
         android:layout_marginTop="100dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
     <EditText
         android:id="@+id/name"
         android:layout_width="@dimen/login_edit"

@@ -13,12 +13,15 @@ import android.widget.TextView;
 import com.ml.doctor.CustomApplication;
 import com.ml.doctor.R;
 import com.ml.doctor.bean.LoginBean;
+import com.ml.doctor.bean.PatientDetailsBean;
 import com.ml.doctor.call2.NimAccountHelper;
 import com.ml.doctor.dialog.LoadingDialog;
 import com.ml.doctor.network.NetworkApi;
 import com.ml.doctor.network.NetworkManager;
 import com.ml.doctor.utils.LocalShared;
 import com.ml.doctor.utils.ToastUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG,response.toString());
                 saveToLocal(response);
                 hideLoadingDialog();
+                //登录成功的时候，改变医生的在线状态
+                changeDoctorOnlineStatus(response.docterid);
             }
         }, new NetworkManager.FailedCallback() {
             @Override
@@ -100,13 +105,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    private void changeDoctorOnlineStatus(String docterid) {
+        NetworkApi.changeDoctorStatus(docterid, "1", new NetworkManager.SuccessCallback<Object>() {
+            @Override
+            public void onSuccess(Object response) {
+                ToastUtil.showShort(LoginActivity.this,"您已上线");
+            }
+        }, new NetworkManager.FailedCallback() {
+            @Override
+            public void onFailed(String message) {
+                ToastUtil.showShort(LoginActivity.this,"上线失败");
+            }
+        });
+    }
+
     /**
      * 保存一些基本信心到SP中
      */
     private void saveToLocal(LoginBean response) {
-        LocalShared.getInstance(this).setUserId(response.getDocterid());
-        LocalShared.getInstance(this).setUserNick(response.getDoctername());
-        LocalShared.getInstance(this).setUserPhone(response.getTel());
+        LocalShared.getInstance(this).setUserId(Integer.parseInt(response.docterid));
+        LocalShared.getInstance(this).setUserNick(response.doctername);
+        LocalShared.getInstance(this).setUserPhone(response.tel);
     }
 
     public void showLoadingDialog(String message) {

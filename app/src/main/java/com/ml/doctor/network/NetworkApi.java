@@ -13,6 +13,7 @@ public class NetworkApi {
 
 //    public static final String BasicUrl = "http://192.168.200.103:8080/ZZB/";
     public static final String BasicUrl = "http://118.31.238.207:8080/ZZB/";
+//    public static final String BasicUrl="http://192.168.200.113:8080/ZZB/";//文博本地
     /**
      * 用户登录
      */
@@ -20,12 +21,15 @@ public class NetworkApi {
     /**
      * 患者列表
      */
-    public static final String PatientList=BasicUrl+"docter/docter_users";
+    public static final String PatientList=BasicUrl+"docter/docters_usersss";
     /**
      * 患者详情页
      */
     public static final String PatientDetails=BasicUrl+"br/docter_oneuser";
-
+    /**
+     * 改变医生的在线状态
+     */
+    public static final String ChangeDocterOnlineStatus=BasicUrl+"docter/update_online_status";
     /**
      * 用户登录
      */
@@ -75,6 +79,20 @@ public class NetworkApi {
         }.getType(),listener,failedCallback);
     }
 
+    /**
+     * 更改医生的在线状态
+     * @param docterid
+     * @param online_status
+     * @param listener
+     * @param failedCallback
+     */
+    public static void changeDoctorStatus(String docterid,String online_status, NetworkManager.SuccessCallback<Object> listener, NetworkManager.FailedCallback failedCallback){
+
+        Map<String,String> map=new HashMap<>();
+        map.put("docterid",docterid);
+        map.put("online_status",online_status);
+        NetworkManager.getInstance().getResultClass(ChangeDocterOnlineStatus,map,Object.class,listener,failedCallback);
+    }
 //    public static void loginWithOpenId(String openId, String type, String nickName, String imageUrl,
 //                                       NetworkManager.SuccessCallback<LoginInfoBean> listener, NetworkManager.FailedCallback failedCallback){
 //        Map<String, String> paramsMap = new HashMap<>();

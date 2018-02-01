@@ -3,6 +3,7 @@ package com.ml.doctor.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -130,70 +131,72 @@ public class PatientDetailsActivity extends BaseActivity {
         weight.setText(patient.getWeight() + "Kg");
         blood.setText(patient.getBlood_type() + "型");
         String eating = "", smoking = "", drinking = "", motioning = "";
-        switch (patient.getEating_habits()) {
+        if (!TextUtils.isEmpty(patient.getEating_habits()))
+            switch (patient.getEating_habits()) {
 
-            case "1":
-                eating = "荤素搭配";
-                break;
-            case "2":
-                eating = "偏好吃荤";
-                break;
-            case "3":
-                eating = "偏好吃素";
-                break;
-            case "4":
-                eating = "偏好吃咸";
-                break;
-            case "5":
-                eating = "偏好油腻";
-                break;
-            case "6":
-                eating = "偏好甜食";
-                break;
-        }
+                case "1":
+                    eating = "荤素搭配";
+                    break;
+                case "2":
+                    eating = "偏好吃荤";
+                    break;
+                case "3":
+                    eating = "偏好吃素";
+                    break;
+                case "4":
+                    eating = "偏好吃咸";
+                    break;
+                case "5":
+                    eating = "偏好油腻";
+                    break;
+                case "6":
+                    eating = "偏好甜食";
+                    break;
+            }
 
         eating_t.setText(eating);
 
-
-        switch (patient.getSmoke()) {
-            case "1":
-                smoking = "经常抽烟";
-                break;
-            case "2":
-                smoking = "偶尔抽烟";
-                break;
-            case "3":
-                smoking = "从不抽烟";
-                break;
-        }
+        if (!TextUtils.isEmpty(patient.getSmoke()))
+            switch (patient.getSmoke()) {
+                case "1":
+                    smoking = "经常抽烟";
+                    break;
+                case "2":
+                    smoking = "偶尔抽烟";
+                    break;
+                case "3":
+                    smoking = "从不抽烟";
+                    break;
+            }
         smoke.setText(smoking);
-        switch (patient.getDrink()) {
-            case "1":
-                drinking = "经常喝酒";
-                break;
-            case "2":
-                drinking = "偶尔喝酒";
-                break;
-            case "3":
-                drinking = "从不喝酒";
-                break;
-        }
+        if (!TextUtils.isEmpty(patient.getDrink()))
+            switch (patient.getDrink()) {
+                case "1":
+                    drinking = "经常喝酒";
+                    break;
+                case "2":
+                    drinking = "偶尔喝酒";
+                    break;
+                case "3":
+                    drinking = "从不喝酒";
+                    break;
+            }
         drinking_t.setText(drinking);
-
-        switch (patient.getExercise_habits()) {
-            case "1":
-                motioning = "每天一次";
-                break;
-            case "2":
-                motioning = "每周几次";
-                break;
-            case "3":
-                motioning = "偶尔运动";
-                break;
-            case "4":
-                motioning = "从不运动";
-                break;
-        }
+        if (!TextUtils.isEmpty(patient.getExercise_habits()))
+            switch (patient.getExercise_habits()) {
+                case "1":
+                    motioning = "每天一次";
+                    break;
+                case "2":
+                    motioning = "每周几次";
+                    break;
+                case "3":
+                    motioning = "偶尔运动";
+                    break;
+                case "4":
+                    motioning = "从不运动";
+                    break;
+            }
         sports.setText(motioning);
     }
 
